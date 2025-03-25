@@ -37,13 +37,53 @@ const recipes = [
     rating: "4.6",
     type: "Breakfast",
   },
+  {
+    title: "Recipe 5",
+    owner: "Charlie Brown",
+    time: "25 min",
+    rating: "4.6",
+    type: "Breakfast",
+  },
+  {
+    title: "Recipe 5",
+    owner: "Charlie Brown",
+    time: "25 min",
+    rating: "4.6",
+    type: "Breakfast",
+  },
+  {
+    title: "Recipe 5",
+    owner: "Charlie Brown",
+    time: "25 min",
+    rating: "4.6",
+    type: "Breakfast",
+  },
+  {
+    title: "Recipe 5",
+    owner: "Charlie Brown",
+    time: "25 min",
+    rating: "4.6",
+    type: "Breakfast",
+  },
+  {
+    title: "Recipe 5",
+    owner: "Charlie Brown",
+    time: "25 min",
+    rating: "4.6",
+    type: "Breakfast",
+  },
+  {
+    title: "Recipe 5",
+    owner: "Charlie Brown",
+    time: "25 min",
+    rating: "4.6",
+    type: "Breakfast",
+  },
 ];
 ---
 
 <section
-  class="flex flex-wrap items-center justify-between
-    gap-x-4 py-1
-    mx-20 rounded-xl"
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 py-1 mx-20 rounded-xl"
 >
   {recipes.map((recipe) => <RecipeCard {...recipe} />)}
 </section>
