@@ -1,0 +1,45 @@
+---
+import BowlIcon from "../icons/Bowl.astro";
+import SearchIcon from "../icons/Search.astro";
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center h-18 justify-between px-24 mb-10"
+>
+  <div class="flex items-center gap-2">
+    <BowlIcon class="size-8" />
+    <span class="font-bold text-xl">DishKeeper</span>
+  </div>
+  <nav class="">
+    <div class="relative flex items-center">
+      <SearchIcon class="size-4 absolute left-3" />
+      <input
+        class="w-xl border border-gray-300 pl-8 pr-2 py-2 rounded-2xl"
+        type="text"
+        placeholder="Search Recipes...."
+      />
+    </div>
+  </nav>
+  <div class="flex items-center gap-4">
+    <a
+      class="text-sm font-medium hover:underline underline-offset-4 hidden sm:inline-flex"
+      href="#login"
+    >
+      Log In
+    </a>
+    <a
+      class="border bg-black text-white px-3 py-2 rounded-md text-sm hover:underline underline-offset-4"
+      href="/src/app/resume/ResumeBuilder.tsx"
+    >
+      Share Recipe
+    </a>
+  </div>
+</header>
+<!-- <div class="lg:hidden relative flex items-center w-full justify-center">
+  <SearchIcon class="size-4 absolute left-2" />
+  <input
+    class="w-xl border pl-8 pr-2 py-2 rounded-2xl"
+    type="text"
+    placeholder="Search Recipes...."
+  />
+</div> -->

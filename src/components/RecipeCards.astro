@@ -1,0 +1,36 @@
+---
+import ClockIcon from "../icons/Clock.astro"
+import StarIcon from "../icons/Star.astro"
+
+const { title, owner, time, rating, type } = Astro.props;
+---
+
+<div class="overflow-hidden rounded-2xl border border-gray-300 mb-4">
+    <div class="relative aspect-video overflow-hidden">
+      <img 
+        src="https://fakeimg.pl/300x200"
+        alt={title} 
+        class="w-full h-full object-cover transition-transform hover:scale-105"
+      />
+      <span class="absolute right-2 top-2 px-2 py-1 bg-black text-white text-sm rounded">
+        {type}
+      </span>
+    </div>
+    
+    <div class="p-4">
+      <h3 class="text-lg font-semibold">{title}</h3>
+      <p class="text-sm">by {owner}</p>
+    </div>
+    
+    <div class="flex items-center justify-between p-4 pt-0">
+      <div class="flex items-center gap-1">
+        <ClockIcon class="size-4 " />
+        <span class="text-xs">{time}</span>
+      </div>
+      
+      <div class="flex items-center gap-1">
+        <StarIcon class="size-4" />
+        <span class="text-xs font-medium">{rating}</span>
+      </div>
+    </div>
+  </div>

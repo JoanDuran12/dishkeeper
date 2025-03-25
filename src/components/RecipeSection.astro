@@ -1,0 +1,49 @@
+---
+import RecipeCard from "./RecipeCards.astro";
+
+const recipes = [
+  {
+    title: "Recipe 1",
+    owner: "John Noe",
+    time: "15 min",
+    rating: "4.8",
+    type: "vegetarian",
+  },
+  {
+    title: "Recipe 2",
+    owner: "Jane Doe",
+    time: "30 min",
+    rating: "4.5",
+    type: "vegan",
+  },
+  {
+    title: "Recipe 3",
+    owner: "Alice Smith",
+    time: "20 min",
+    rating: "4.7",
+    type: "Lunch",
+  },
+  {
+    title: "Recipe 4",
+    owner: "Bob Johnson",
+    time: "10 min",
+    rating: "4.9",
+    type: "Dinner",
+  },
+  {
+    title: "Recipe 5",
+    owner: "Charlie Brown",
+    time: "25 min",
+    rating: "4.6",
+    type: "Breakfast",
+  },
+];
+---
+
+<section
+  class="flex flex-wrap items-center justify-between
+    gap-x-4 py-1
+    mx-20 rounded-xl"
+>
+  {recipes.map((recipe) => <RecipeCard {...recipe} />)}
+</section>

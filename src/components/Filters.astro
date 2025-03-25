@@ -1,0 +1,27 @@
+---
+const filters = [
+  "All Recipes",
+  "Breakfast",
+  "Lunch",
+  "Dinner",
+  "Vegetarian",
+  "Vegan",
+];
+---
+
+<div
+  class="flex items-center
+    gap-x-4 bg-gray-100 text-gray-600 py-1
+    mx-20 rounded-xl mb-6"
+>
+  {
+    filters.map((filter) => (
+      <p
+        class="hover:bg-white hover:text-black hover:shadow-sm
+  py-1 px-2 ml-2 rounded"
+      >
+        {filter}
+      </p>
+    ))
+  }
+</div>
