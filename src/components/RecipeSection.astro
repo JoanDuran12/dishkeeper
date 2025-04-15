@@ -1,89 +1,46 @@
 ---
-import RecipeCard from "./RecipeCards.astro";
-
-const recipes = [
-  {
-    title: "Recipe 1",
-    owner: "John Noe",
-    time: "15 min",
-    rating: "4.8",
-    type: "vegetarian",
-  },
-  {
-    title: "Recipe 2",
-    owner: "Jane Doe",
-    time: "30 min",
-    rating: "4.5",
-    type: "vegan",
-  },
-  {
-    title: "Recipe 3",
-    owner: "Alice Smith",
-    time: "20 min",
-    rating: "4.7",
-    type: "Lunch",
-  },
-  {
-    title: "Recipe 4",
-    owner: "Bob Johnson",
-    time: "10 min",
-    rating: "4.9",
-    type: "Dinner",
-  },
-  {
-    title: "Recipe 5",
-    owner: "Charlie Brown",
-    time: "25 min",
-    rating: "4.6",
-    type: "Breakfast",
-  },
-  {
-    title: "Recipe 5",
-    owner: "Charlie Brown",
-    time: "25 min",
-    rating: "4.6",
-    type: "Breakfast",
-  },
-  {
-    title: "Recipe 5",
-    owner: "Charlie Brown",
-    time: "25 min",
-    rating: "4.6",
-    type: "Breakfast",
-  },
-  {
-    title: "Recipe 5",
-    owner: "Charlie Brown",
-    time: "25 min",
-    rating: "4.6",
-    type: "Breakfast",
-  },
-  {
-    title: "Recipe 5",
-    owner: "Charlie Brown",
-    time: "25 min",
-    rating: "4.6",
-    type: "Breakfast",
-  },
-  {
-    title: "Recipe 5",
-    owner: "Charlie Brown",
-    time: "25 min",
-    rating: "4.6",
-    type: "Breakfast",
-  },
-  {
-    title: "Recipe 5",
-    owner: "Charlie Brown",
-    time: "25 min",
-    rating: "4.6",
-    type: "Breakfast",
-  },
-];
 ---
-
-<section
-  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 py-1 mx-20 rounded-xl"
->
-  {recipes.map((recipe) => <RecipeCard {...recipe} />)}
+<section id="recipeSection" class="recipe-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6">
+  <p>Loading recipes...</p>
 </section>
+
+<script type="module">
+  const section = document.getElementById("recipeSection");
+
+  async function loadRecipes() {
+    try {
+      const res = await fetch("http://localhost:5000/api/recipes");
+      const recipes = await res.json();
+
+      if (!Array.isArray(recipes) || recipes.length === 0) {
+        section.innerHTML = "<p>No recipes found.</p>";
+        return;
+      }
+
+      section.innerHTML = recipes.map(recipe => {
+        const image = recipe.image_url;
+        return `
+          <a href="/recipe/${recipe.id}" class="block overflow-hidden rounded-2xl border border-gray-300 hover:shadow-md transition bg-white">
+            <div class="relative aspect-video overflow-hidden">
+              <img 
+                src="${image}"
+                alt="${recipe.title}"
+                class="w-full h-full object-cover transition-transform hover:scale-105"
+              />
+              <span class="absolute right-2 top-2 px-2 py-1 bg-white/80 rounded text-sm">Recipe</span>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">${recipe.title}</h3>
+              <p class="text-sm text-gray-600">By ${recipe.author}</p>
+            </div>
+          </a>
+        `;
+      }).join("");
+    } catch (err) {
+      section.innerHTML = "<p>Failed to load recipes.</p>";
+      console.error("Error loading recipes:", err);
+    }
+  }
+
+  loadRecipes();
+</script>

@@ -1,0 +1,118 @@
+---
+---
+<html lang="en">
+  <head>
+    <title>Share a Recipe | DishKeeper</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-50 text-gray-900 font-[Inter] min-h-screen flex items-center justify-center px-4">
+    <main class="w-full max-w-2xl p-8 bg-white rounded-2xl shadow-md">
+      <h1 class="text-3xl font-bold mb-1">Share a Recipe</h1>
+      <p class="text-sm text-gray-500 mb-6">Post a new recipe for others to try and enjoy.</p>
+
+      <form id="recipeForm" class="space-y-6" enctype="multipart/form-data">
+        <!-- Title -->
+        <div>
+          <label class="block text-sm font-medium mb-1">Title</label>
+          <input
+            name="title"
+            required
+            placeholder="e.g. Creamy Tomato Pasta"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <!-- Content -->
+        <div>
+          <label class="block text-sm font-medium mb-1">Content</label>
+          <textarea
+            name="content"
+            rows="6"
+            required
+            placeholder="## Ingredients\n- 1 cup milk\n\n## Instructions\n1. Heat the pan..."
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+          <p class="text-xs text-gray-400 mt-1">Supports markdown for headers, steps, and lists.</p>
+        </div>
+
+        <!-- Prep Time & Servings -->
+        <div class="flex gap-4">
+          <div class="w-1/2">
+            <label class="block text-sm font-medium mb-1">Prep Time</label>
+            <input
+              name="prep_time"
+              placeholder="e.g. 20 min"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div class="w-1/2">
+            <label class="block text-sm font-medium mb-1">Servings</label>
+            <input
+              name="servings"
+              type="number"
+              min="1"
+              placeholder="e.g. 4"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <!-- Image Upload -->
+        <div>
+          <label class="block text-sm font-medium mb-1">Image</label>
+          <input
+            name="image"
+            type="file"
+            accept="image/*"
+            required
+            class="block w-full text-sm text-gray-600
+                   file:mr-4 file:py-2 file:px-4
+                   file:rounded-lg file:border-0
+                   file:text-sm file:font-semibold
+                   file:bg-gray-100 file:text-gray-700
+                   hover:file:bg-gray-200 transition"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            class="w-full bg-black text-white font-medium py-2 rounded-lg hover:bg-gray-800 transition"
+          >
+            Submit Recipe
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <script type="module">
+      const form = document.getElementById("recipeForm");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const token = localStorage.getItem("token");
+
+        const res = await fetch("http://localhost:5000/api/recipes/upload", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          alert("Recipe submitted successfully!");
+          window.location.href = "/";
+        } else {
+          alert(data.message || "Error submitting recipe.");
+        }
+      });
+    </script>
+  </body>
+</html>

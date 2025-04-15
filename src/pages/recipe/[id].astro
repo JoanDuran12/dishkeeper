@@ -1,0 +1,32 @@
+---
+import Header from "../../components/Header.astro";
+import Layout from "../../layouts/Layout.astro";
+export const prerender = false;
+
+const { params } = Astro;
+const res = await fetch(`http://localhost:5000/api/recipes/${params.id}`);
+const recipe = await res.json();
+---
+
+<html lang="en">
+  <head>
+    <title>{recipe.title}</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <Layout>
+    <Header/>
+      
+
+      <h1>{recipe.title}</h1>
+
+      <img src={recipe.image_url} alt={recipe.title} width="600" />
+
+      <p><strong>Prep Time:</strong> {recipe.prep_time || '—'}</p>
+      <p><strong>Servings:</strong> {recipe.servings || '—'}</p>
+
+      <h2>Instructions</h2>
+      <pre>{recipe.content}</pre>
+    </Layout>
+  </body>
+</html>
